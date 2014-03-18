@@ -1,13 +1,11 @@
 package our.cainiao.app.feedback.service.user;
 
+import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import our.cainiao.app.feedback.bo.User;
+import our.cainiao.app.feedback.common.TestCaseBase;
 import our.cainiao.app.feedback.service.UserMgr;
 
 /**
@@ -16,15 +14,17 @@ import our.cainiao.app.feedback.service.UserMgr;
  * @author zhangbi
  * @date 2014年3月15日下午5:14:18
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:applicationContext.xml")
-public class UserMgrTestCase extends
-        AbstractTransactionalJUnit4SpringContextTests {
+public class UserMgrTestCase extends TestCaseBase {
     @Autowired
     private UserMgr userMgr;
 
     @Test
     public void testCreate() {
-        userMgr.createUser(new User());
+        User user = new User();
+        user.setUsername("user1");
+        user.setPassword("a");
+        user = userMgr.createUser(user);
+        Assert.assertNotNull(user);
+        Assert.assertTrue(user.getId() > 0);
     }
 }

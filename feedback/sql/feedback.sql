@@ -17,10 +17,11 @@ USE `feedback`;
 
 -- 导出  表 feedback.feedback 结构
 CREATE TABLE IF NOT EXISTS `feedback` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(256) NOT NULL,
   `content` text,
-  `image` binary(50) DEFAULT NULL
+  `image` binary(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- 正在导出表  feedback.feedback 的数据：~0 rows (大约)
@@ -30,17 +31,21 @@ CREATE TABLE IF NOT EXISTS `feedback` (
 
 -- 导出  表 feedback.user 结构
 CREATE TABLE IF NOT EXISTS `user` (
-  `user_id` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
   `password` varchar(32) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `created_time` datetime NOT NULL,
-  PRIMARY KEY (`user_id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
+  `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- 正在导出表  feedback.user 的数据：~0 rows (大约)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `created_time`) VALUES
+	(3, 'a', 'a', NULL, '2014-03-18 20:27:09'),
+	(6, 'a', 'a', NULL, '2014-03-18 20:32:20'),
+	(7, 'a', 'a', NULL, '2014-03-18 20:46:26'),
+	(8, 'a', 'a', NULL, '2014-03-18 20:50:49');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
