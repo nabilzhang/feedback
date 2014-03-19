@@ -24,7 +24,7 @@ public class UserController extends BaseController {
 
     @RequestMapping("/register")
     public Object register(User user) {
-        log.info(user.toString());
+        log.info(">> register() > Got Param : '{}'", user);
         return userMgr.createUser(user);
     }
 }

@@ -3,6 +3,7 @@ package our.cainiao.app.feedback.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import our.cainiao.app.feedback.bo.User;
 
@@ -11,7 +12,7 @@ public class BaseController {
 
 	protected Logger getLogger() {
 		if (null == logger) {
-			logger = org.slf4j.LoggerFactory.getLogger(this.getClass());
+            logger = LoggerFactory.getLogger(this.getClass());
 		}
 		return logger;
 	}
