@@ -10,24 +10,47 @@
       <title>集智-集万千智慧</title>
       <!-- Bootstrap core CSS -->
       <link href="./css/bootstrap.min.css" rel="stylesheet">
+      <link href="./css/bootstrap-theme.min.css" rel="stylesheet">
       <!-- Custom styles for this template -->
       <link href="./css/login.css" rel="stylesheet">
    </head>
    <body>
-      <div class="container">
-         <form class="form-signin" role="form">
-            <h2 class="form-signin-heading center">集智-集万千智慧</h2>
-            <input type="email" class="form-control" placeholder="邮箱" required
-               autofocus /> 
-            <input type="password" class="form-control"
-               placeholder="密码" required> 
-            <label class="checkbox"><input type="checkbox" value="remember-me"> 记住我</label>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
-         </form>
+      <div class="container form-signin-container">
+         <h2 class="form-signin-heading center">集智-集万千智慧</h2>
+         <!-- Nav tabs -->
+         <ul class="nav nav-tabs" id="login_tab">
+            <li class="active"><a href="#login" data-toggle="tab">登录</a></li>
+            <li><a href="#signup" data-toggle="tab">注册</a></li>
+         </ul>
+         <div class="tab-content">
+            <div class="tab-pane fade in active" id="login">
+		        <form class="form-signin" role="form">
+		            <input type="email" class="form-control" placeholder="邮箱" required autofocus />
+		            <input type="password" class="form-control" placeholder="密码" required>
+		            <label class="checkbox"><input type="checkbox" value="remember-me"> 记住我</label>
+		            <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
+		         </form>
+            </div>
+            <div class="tab-pane fade" id="signup">
+                <form class="form-signup" role="form">
+                    <input type="email" class="form-control" placeholder="邮箱" required autofocus />
+                    <input type="password" class="form-control" placeholder="密码" required/>
+                    <input type="password" class="form-control" placeholder="重复密码" required>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
+                 </form>
+            </div>
+         </div>
+         <script>
+		  $(function () {
+		    $('#login_tab a:last').tab('show')
+		  })
+		</script>
       </div>
       <!-- /container -->
       <!-- Bootstrap core JavaScript
          ================================================== -->
       <!-- Placed at the end of the document so the pages load faster -->
+      <script src="./js/jquery.1.11.0.min.js"></script>
+      <script src="./js/bootstrap.min.js"></script>
    </body>
 </html>
