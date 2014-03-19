@@ -6,14 +6,13 @@ body {
 }
 .form-signin-container{
 	max-width: 330px;
-    padding: 15px;
     margin: 0 auto;
+    border:1px solid #ccc;
 }
 .form-signin-container .form-signin-heading{
     text-align: center;
 }
-.form-signin {
-	max-width: 330px;
+.form-signin, .form-signup{
 	padding: 15px;
 	margin: 0 auto;
 }
