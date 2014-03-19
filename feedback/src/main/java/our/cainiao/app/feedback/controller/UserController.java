@@ -17,14 +17,14 @@ import our.cainiao.app.feedback.service.UserMgr;
 @Controller
 @RequestMapping("/user")
 public class UserController extends BaseController {
-    private Logger log = getLogger();
+    private Logger LOG = getLogger();
 
     @Autowired
     private UserMgr userMgr;
 
     @RequestMapping("/register")
     public Object register(User user) {
-        log.info(">> register() > Got Param : '{}'", user);
+        LOG.info(">> register() > Got Param : '{}'", user);
         return userMgr.createUser(user);
     }
 }
