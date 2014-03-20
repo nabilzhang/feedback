@@ -20,11 +20,26 @@ public class UserMgrTestCase extends TestCaseBase {
 
     @Test
     public void testCreate() {
-        User user = new User();
-        user.setUsername("user1");
-        user.setPassword("a");
+        User user = mockUser();
         user = userMgr.createUser(user);
         Assert.assertNotNull(user);
         Assert.assertTrue(user.getId() > 0);
+    }
+
+    @Test
+    public void testLogin() {
+        // 创建mockUser
+        User user = mockUser();
+        user = userMgr.createUser(user);
+
+        // 测试登录
+        Assert.assertTrue(userMgr.login(user));
+    }
+
+    private User mockUser() {
+        User user = new User();
+        user.setUsername("user1");
+        user.setPassword("a");
+        return user;
     }
 }

@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import our.cainiao.app.feedback.bo.User;
+import our.cainiao.app.feedback.template.BaseTemplate;
 
 public class BaseController {
 	private Logger logger = null;
@@ -28,4 +29,30 @@ public class BaseController {
 		return user;
 		
 	}
+	
+    /**
+     * 成功的结果
+     * 
+     * @param result
+     * @return
+     */
+    protected BaseTemplate buildSuccess(Object result) {
+        BaseTemplate baseTemplate = new BaseTemplate();
+        baseTemplate.setSuccess(true);
+        baseTemplate.setResult(result);
+        return baseTemplate;
+    }
+
+    /**
+     * 成功的结果
+     * 
+     * @param result
+     * @return
+     */
+    protected BaseTemplate buildFailed(Object errMsg) {
+        BaseTemplate baseTemplate = new BaseTemplate();
+        baseTemplate.setSuccess(false);
+        baseTemplate.setErrMsg(errMsg);
+        return baseTemplate;
+    }
 }

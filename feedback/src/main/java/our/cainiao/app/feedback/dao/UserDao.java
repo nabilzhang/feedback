@@ -14,5 +14,11 @@ import our.cainiao.app.feedback.bo.User;
  */
 @Repository
 public interface UserDao extends JpaRepository<User, Long> {
-
+    /**
+     * 根据email查询
+     * 
+     * @param email
+     * @return
+     */
+    public User findByEmail(String email);
 }

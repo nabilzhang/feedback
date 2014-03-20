@@ -18,4 +18,20 @@ public interface UserMgr {
      * @return
      */
     User createUser(User user);
+
+    /**
+     * 用户登录校验
+     * 
+     * @param user
+     * @return
+     */
+    boolean login(User user);
+
+    /**
+     * 根据email获取用户
+     * 
+     * @param email
+     * @return
+     */
+    User getByEmail(String email);
 }

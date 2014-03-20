@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="">
+	  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+   </head>
+   <body>
+    <form id="testform" action="http://localhost:8080/api/feedback" method="post">
+		<label>标题<input name="title" type="text"/></label><br/>
+		<input onclick="create();" type="button"/>
+	</form>
+	<script>
+		function create(){
+			$.post( "http://localhost:8080/api/feedback", $( "#testform" ).serialize(), function(data){
+				alert(data.success);
+			} );
+		}
+	</script>
+   </body>
+</html>

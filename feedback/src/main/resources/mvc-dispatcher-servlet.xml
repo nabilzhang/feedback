@@ -40,4 +40,11 @@
     <mvc:resources mapping="/css/**" location="/WEB-INF/static/css/" />
     <mvc:resources mapping="/js/**" location="/WEB-INF/static/js/" />
     <mvc:resources mapping="/fonts/**" location="/WEB-INF/static/fonts/" />
+    
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/user/**"  />
+            <bean class="our.cainiao.app.feedback.interceptors.AuthInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

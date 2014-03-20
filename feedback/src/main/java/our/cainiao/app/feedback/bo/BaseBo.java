@@ -18,13 +18,19 @@ import javax.persistence.TemporalType;
  */
 @MappedSuperclass
 public class BaseBo {
+    /** Id 主键 */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /** 创建时间 */
     @Column(name = "created_time")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdTime = new Date();
+
+    /** 创建人,默认为0 */
+    @Column(name = "created_by")
+    private long createdBy = 0;
 
     /**
      * Returns the identifier of the entity.
@@ -37,6 +43,14 @@ public class BaseBo {
 
     public Date getCreatedTime() {
         return createdTime;
+    }
+
+    public long getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(long createdBy) {
+        this.createdBy = createdBy;
     }
 
     /*
