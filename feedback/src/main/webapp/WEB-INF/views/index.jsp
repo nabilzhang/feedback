@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <html lang="zh-cn">
    <head>
       <meta charset="utf-8">

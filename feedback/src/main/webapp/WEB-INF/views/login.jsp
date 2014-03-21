@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <html lang="zh-cn">
    <head>
       <meta charset="utf-8">
@@ -24,12 +24,12 @@
          </ul>
          <div class="tab-content">
             <div class="tab-pane fade in active" id="login">
-		        <form class="form-signin" role="form">
-		            <input type="email" class="form-control" placeholder="邮箱" required autofocus />
-		            <input type="password" class="form-control" placeholder="密码" required>
-		            <label class="checkbox"><input type="checkbox" value="remember-me"> 记住我</label>
-		            <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
-		         </form>
+                <form class="form-signin" role="form">
+                    <input type="email" class="form-control" placeholder="邮箱" required autofocus />
+                    <input type="password" class="form-control" placeholder="密码" required>
+                    <label class="checkbox"><input type="checkbox" value="remember-me"> 记住我</label>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
+                 </form>
             </div>
             <div class="tab-pane fade" id="signup">
                 <form class="form-signup" role="form">
@@ -41,10 +41,10 @@
             </div>
          </div>
          <script>
-		  $(function () {
-		    $('#login_tab a:last').tab('show')
-		  })
-		</script>
+          $(function () {
+            $('#login_tab a:last').tab('show')
+          })
+        </script>
       </div>
       <!-- /container -->
       <!-- Bootstrap core JavaScript

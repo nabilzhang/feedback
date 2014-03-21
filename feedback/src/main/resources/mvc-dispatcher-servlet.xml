@@ -34,17 +34,31 @@
 			</list>
 		</property>
 	</bean>
-	
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		abstract="false" lazy-init="default" autowire="default">
+		<property name="viewClass">
+			<value>org.springframework.web.servlet.view.JstlView</value>
+		</property>
+		<property name="prefix">
+			<value>/WEB-INF/views/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+
 	<mvc:default-servlet-handler />
-    <mvc:resources mapping="/**.html" location="/WEB-INF/static/" />
-    <mvc:resources mapping="/css/**" location="/WEB-INF/static/css/" />
-    <mvc:resources mapping="/js/**" location="/WEB-INF/static/js/" />
-    <mvc:resources mapping="/fonts/**" location="/WEB-INF/static/fonts/" />
-    
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/user/**"  />
-            <bean class="our.cainiao.app.feedback.interceptors.AuthInterceptor" />
-        </mvc:interceptor>
-    </mvc:interceptors>
+	<mvc:resources mapping="/**.html" location="/WEB-INF/static/" />
+	<mvc:resources mapping="/css/**" location="/WEB-INF/static/css/" />
+	<mvc:resources mapping="/js/**" location="/WEB-INF/static/js/" />
+	<mvc:resources mapping="/fonts/**" location="/WEB-INF/static/fonts/" />
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/**" />
+			<bean class="our.cainiao.app.feedback.interceptors.AuthInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>

@@ -20,12 +20,18 @@
 
 	<context:component-scan base-package="our.cainiao.app.feedback" />
 
+    <bean id="configBean"
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location">
+            <value>classpath:db-pw.properties</value>
+        </property>
+    </bean>
+    
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-		<property name="url"
-			value="jdbc:mysql://localhost:3306/feedback?useUnicode=true&amp;characterEncoding=UTF-8"></property>
-		<property name="username" value="root"></property>
-		<property name="password" value="123"></property>
+		<property name="url" value="${jdbc.mysql.url}" />
+        <property name="username" value="${jdbc.mysql.username}" />
+        <property name="password" value="${jdbc.mysql.passwd}" />
 		<property name="maxActive" value="10"></property>
 		<property name="maxIdle" value="30"></property>
 		<property name="maxWait" value="10"></property>
