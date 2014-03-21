@@ -4,11 +4,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import our.cainiao.app.feedback.bo.Project;
+import our.cainiao.app.feedback.form.ListRequestForm;
 import our.cainiao.app.feedback.service.ProjectMgr;
 
 /**
@@ -25,7 +28,7 @@ public class ProjectController extends BaseController {
     private ProjectMgr projectMgr;
 
     private Logger LOG = getLogger();
-    
+
     /**
      * 创建项目
      * 
@@ -39,6 +42,21 @@ public class ProjectController extends BaseController {
         project.setCreatedBy(getUser(request).getId());
         project = projectMgr.create(project);
         return buildSuccess(project);
+    }
+
+    /**
+     * 项目列表
+     * 
+     * @return
+     */
+    @RequestMapping("")
+    public String list(ListRequestForm form,
+            Model model, HttpServletRequest request) {
+        Long userId = 0L;//TODO
+        Page<Project> projectPage = projectMgr.listByUser(userId,
+                form.getPageNo(), form.getPageSize());
+        model.addAttribute("projects", projectPage);
+        return "index";
     }
 
 }

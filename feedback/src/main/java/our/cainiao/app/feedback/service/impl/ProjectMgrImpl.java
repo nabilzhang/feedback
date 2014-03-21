@@ -1,6 +1,8 @@
 package our.cainiao.app.feedback.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import our.cainiao.app.feedback.bo.Project;
@@ -29,6 +31,13 @@ public class ProjectMgrImpl implements ProjectMgr {
     public Project get(Long id) {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public Page<Project> listByUser(Long userId, int page, int pageSize) {
+        PageRequest pageRequest = new PageRequest(page, pageSize);
+
+        return projectDao.findByCreatedBy(userId, pageRequest);
     }
 
 }

@@ -16,8 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController {
     @RequestMapping(value = "")
+    public String root(HttpServletRequest request, HttpServletResponse response) {
+        return "redirect:project";
+    }
+
+    @RequestMapping(value = "index")
     public String index(HttpServletRequest request,
             HttpServletResponse response) {
-        return "index";
+        return "redirect:project";
     }
 }

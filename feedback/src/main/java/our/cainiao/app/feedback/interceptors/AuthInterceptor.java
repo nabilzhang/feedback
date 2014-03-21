@@ -12,7 +12,8 @@ import our.cainiao.app.feedback.bo.User;
 
 public class AuthInterceptor extends HandlerInterceptorAdapter {
 
-    String[] NO_FILTER_URLS = new String[] { "/user/login", "/user/register" };
+    String[] NO_FILTER_URLS = new String[] { "/user/login", "/user/register",
+            "/user/logon" };
 
 	@Override
 	public boolean preHandle(HttpServletRequest request,

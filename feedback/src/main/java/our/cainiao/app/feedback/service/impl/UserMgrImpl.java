@@ -2,6 +2,8 @@ package our.cainiao.app.feedback.service.impl;
 
 import java.security.MessageDigest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,8 @@ import our.cainiao.app.feedback.service.UserMgr;
  */
 @Service
 public class UserMgrImpl implements UserMgr {
+    private static Logger LOG = LoggerFactory.getLogger(UserMgrImpl.class);
+
     @Autowired
     private UserDao userDao;
 
@@ -31,9 +35,11 @@ public class UserMgrImpl implements UserMgr {
     public boolean login(User user) {
         User u = userDao.findByEmail(user.getEmail());
         String passwordMd5 = toMd5(user.getPassword());
-        if (u.getPassword().equals(passwordMd5)) {
+        if (u != null && u.getPassword().equals(passwordMd5)) {
+            LOG.info("user {} login success！", user.getEmail());
             return true;
         }
+        LOG.info("user {} login failed！", user.getEmail());
         return false;
     }
 

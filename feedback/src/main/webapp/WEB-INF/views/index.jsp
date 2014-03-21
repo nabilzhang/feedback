@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <html lang="zh-cn">
    <head>
@@ -61,30 +62,27 @@
                   <table class="table table-striped">
                      <thead>
                         <tr>
-                           <th>#</th>
-                           <th>Header</th>
-                           <th>Header</th>
-                           <th>Header</th>
-                           <th>Header</th>
+                           <th>编号</th>
+                           <th>名称</th>
+                           <th>描述</th>
+                           <th>token</th>
                         </tr>
                      </thead>
                      <tbody>
-                        <tr>
-                           <td>1,001</td>
-                           <td>Lorem</td>
-                           <td>ipsum</td>
-                           <td>dolor</td>
-                           <td>sit</td>
+                        <c:forEach items="${projects.content}" var="project">
+                            <tr>
+                           <td><c:out value="${project.id}"/></td>
+                           <td><c:out value="${project.name}"/></td>
+                           <td><c:out value="${project.abstractContent}"/></td>
+                           <td><c:out value="${project.createdTime}"/></td>
                         </tr>
-                        <tr>
-                           <td>1,002</td>
-                           <td>amet</td>
-                           <td>consectetur</td>
-                           <td>adipiscing</td>
-                           <td>elit</td>
-                        </tr>
+                        </c:forEach>
                      </tbody>
                   </table>
+                  <ul class="pagination">
+                        <li><a href="?pageNo=<c:out value="{projects.getNumber()}"/>">&laquo;</a></li>
+                        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                  </ul>
                </div>
             </div>
          </div>
