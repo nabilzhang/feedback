@@ -58,6 +58,8 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/user/**" />
+			<mvc:mapping path="/project/**" />
+			<mvc:mapping path="/project" />
 			<bean class="our.cainiao.app.feedback.interceptors.AuthInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>

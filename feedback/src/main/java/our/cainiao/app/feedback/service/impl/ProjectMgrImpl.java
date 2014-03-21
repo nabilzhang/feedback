@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import our.cainiao.app.feedback.bo.Project;
 import our.cainiao.app.feedback.dao.ProjectDao;
 import our.cainiao.app.feedback.service.ProjectMgr;
+import our.cainiao.app.feedback.utils.MD5Util;
 
 /**
  * 
@@ -24,7 +25,12 @@ public class ProjectMgrImpl implements ProjectMgr {
 
     @Override
     public Project create(Project project) {
-        return projectDao.save(project);
+        project = projectDao.save(project);
+        // 生成token
+        String token = MD5Util.toMd5(project.getName() + project.getId());
+        project.setToken(token);
+        project = projectDao.save(project);
+        return project;
     }
 
     @Override

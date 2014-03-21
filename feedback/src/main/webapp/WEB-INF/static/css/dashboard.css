@@ -97,3 +97,17 @@ body {
 	display: inline-block;
 	border-radius: 50%;
 }
+
+/**
+ *项目页面
+ */
+#table-wrap{
+
+}
+
+#create_project_panel{
+	display:none;
+}
+#create_project_panel .form-control{
+	margin:3px;
+}

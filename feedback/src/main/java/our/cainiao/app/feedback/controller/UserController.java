@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import our.cainiao.app.feedback.bo.User;
+import our.cainiao.app.feedback.constants.Constants;
 import our.cainiao.app.feedback.form.UserForm;
 import our.cainiao.app.feedback.service.UserMgr;
 
@@ -69,6 +70,8 @@ public class UserController extends BaseController {
         LOG.info(">> logon() > Got Param : '{}'", user);
         boolean isLogin = userMgr.login(user);
         if(isLogin){
+            user = userMgr.getByEmail(user.getEmail());
+            request.getSession().setAttribute(Constants.USER_SESSION, user);
             return buildSuccess(null);
         } else {
             return buildFailed("用户名或密码错误");

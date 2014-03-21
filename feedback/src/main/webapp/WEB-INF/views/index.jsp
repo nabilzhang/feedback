@@ -49,32 +49,39 @@
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                <h1 class="page-header">项目管理</h1>
-               <div class="btn-group">
-                  <button type="button" class="btn">操作</button>
-                  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-                  <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu" role="menu">
-                     <li><a href="#"><span class="glyphicon glyphicon-plus"></span> 新建</a></li>
-                  </ul>
+               <div class="panel panel-default">
+               
+               <div class="panel-heading" id="project_panel_header">
+                    <button type="button" class="btn btn-primary" id="create_btn">新建</button>
                </div>
-               <div class="table-responsive">
-                  <table class="table table-striped">
-                     <thead>
+                <div class="panel-body" id="create_project_panel">
+                    <form>
+                        <input type="text" name="name" class="form-control" placeholder="项目名称" required autofocus />
+                        <textarea name="abstractContent" class="form-control" placeholder="项目简介" required ></textarea>
+                        <button class="btn btn-primary" id="confirm" type="button">完成</button>
+                        <button class="btn btn-default" id="cancel" type="button">取消</button>
+                    </form>
+                    <div id="warning" class="alert alert-danger"></div>
+                </div>
+               <div class="table-responsive" id="table-wrap">
+                  <table class="table table-hover">
+                     <thead style="background:#f5f5f5">
                         <tr>
-                           <th>编号</th>
                            <th>名称</th>
-                           <th>描述</th>
+                           <th>简介</th>
+                           <th>创建时间</th>
                            <th>token</th>
+                           <th>操作</th>
                         </tr>
                      </thead>
                      <tbody>
                         <c:forEach items="${projects.content}" var="project">
                             <tr>
-                           <td><c:out value="${project.id}"/></td>
                            <td><c:out value="${project.name}"/></td>
                            <td><c:out value="${project.abstractContent}"/></td>
                            <td><c:out value="${project.createdTime}"/></td>
+                           <td><c:out value="${project.token}"/></td>
+                           <td><a href=""><span class="glyphicon glyphicon-remove"></span></a></td>
                         </tr>
                         </c:forEach>
                      </tbody>
@@ -84,7 +91,9 @@
                         <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
                   </ul>
                </div>
+               <!-- table-responsive  end -->
             </div>
+            <!-- panel end -->
          </div>
       </div>
       <!-- Bootstrap core JavaScript
@@ -93,5 +102,41 @@
       <script src="./js/jquery.1.11.0.min.js"></script>
       <script src="./js/bootstrap.min.js"></script>
       <script src="./js/docs.min.js"></script>
+      
+      <script>
+      $(document).ready(function(){
+    	  //初始化
+    	  $("#create_project_panel").hide();
+    	  $("#warning").hide();
+    	  
+    	  $("#project_panel_header").delegate('#create_btn', 'click', function(){
+    		  $("#create_project_panel").show();
+    	  });
+    	  //点击完成按钮
+    	  $("#create_project_panel").delegate("#confirm", 'click', function(){
+    		  create_project();
+    	  });
+    	  
+    	  ////点击取消按钮
+          $("#create_project_panel").delegate("#cancel", 'click', function(){
+        	  $("#create_project_panel form")[0].reset();
+        	  $("#create_project_panel").hide();
+          });
+      });
+      
+      //创建项目
+      function create_project(){
+    	  $("#warning").hide();
+    	  $.post( "/project",  $("#create_project_panel form").serialize(), function(data){
+    		  if(data.success){
+    			  window.location.href="";
+    		  } else {
+    			  $("#warning").text(data.errMsg).show();
+    		  }
+    	  });
+      }
+      
+      
+      </script>
    </body>
 </html>

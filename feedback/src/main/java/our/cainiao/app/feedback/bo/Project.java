@@ -22,6 +22,10 @@ public class Project extends BaseBo {
     @Column(name = "abstract_content")
     private String abstractContent;
 
+    /** 唯一识别token */
+    @Column(name = "token")
+    private String token;
+
     public String getName() {
         return name;
     }
@@ -36,6 +40,20 @@ public class Project extends BaseBo {
 
     public void setAbstractContent(String abstractContent) {
         this.abstractContent = abstractContent;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    @Override
+    public String toString() {
+        return "Project [name=" + name + ", abstractContent=" + abstractContent
+                + ", token=" + token + "]";
     }
 
 }

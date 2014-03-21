@@ -52,7 +52,6 @@
       <script src="../js/bootstrap.min.js"></script>
       <script>
           $(document).ready(function () {
-            $('#login_tab a:last').tab('show');
             $("#warning").hide();
           });
           //注册

@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import our.cainiao.app.feedback.bo.Project;
 import our.cainiao.app.feedback.form.ListRequestForm;
@@ -36,9 +38,14 @@ public class ProjectController extends BaseController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    @ResponseBody
     public Object create(Project project, HttpServletRequest request) {
         LOG.info(">> create() > GOT PARAMS '{}','{}'", project, request);
+        if (StringUtils.isEmpty(project.getName())) {
+            return buildFailed("项目名称不能为空");
+        }
+
         project.setCreatedBy(getUser(request).getId());
         project = projectMgr.create(project);
         return buildSuccess(project);
@@ -49,10 +56,10 @@ public class ProjectController extends BaseController {
      * 
      * @return
      */
-    @RequestMapping("")
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public String list(ListRequestForm form,
             Model model, HttpServletRequest request) {
-        Long userId = 0L;//TODO
+        Long userId = getUser(request).getId();
         Page<Project> projectPage = projectMgr.listByUser(userId,
                 form.getPageNo(), form.getPageSize());
         model.addAttribute("projects", projectPage);
