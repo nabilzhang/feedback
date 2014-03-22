@@ -8,7 +8,7 @@
       <meta name="description" content="">
       <meta name="author" content="">
       <link rel="shortcut icon" href="">
-      <title>集智-集万千智慧</title>
+      <title>百度倾听-倾听用户心声</title>
       <!-- Bootstrap core CSS -->
       <link href="./css/bootstrap.min.css" rel="stylesheet">
       <!-- Custom styles for this template -->
@@ -73,7 +73,7 @@
                            <th>名称</th>
                            <th>简介</th>
                            <th>创建时间</th>
-                           <th>token</th>
+                           <th>代码</th>
                            <th>操作</th>
                         </tr>
                      </thead>
@@ -83,7 +83,8 @@
                            <td><a href="/feedbacks?projectId=<c:out value="${project.id}"/>"><c:out value="${project.name}"/></a></td>
                            <td><c:out value="${project.abstractContent}"/></td>
                            <td><c:out value="${project.createdTime}"/></td>
-                           <td><c:out value="${project.token}"/></td>
+                           <td>
+                           <a href="#" class="btn btn-info codeshow" data-token="<c:out value="${project.token}"/>" data-toggle="modal" data-target="#scriptModel">查看代码</a></td>
                            <td><a href="javascript:void(0);" onclick="delete_project(<c:out value="${project.id}"/>)"><span class="glyphicon glyphicon-remove"></span></a></td>
                         </tr>
                         </c:forEach>
@@ -95,13 +96,41 @@
             <!-- panel end -->
          </div>
       </div>
+	<div id="scriptModel" class="modal fade">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title">拷贝脚本到页面</h4>
+	      </div>
+	      <div class="modal-body">
+<pre>
+<code>
+&lt;link href=&quot;<span class="host">token</span>css/feedback.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+&lt;script src=&quot;<span class="host">token</span>js/fabric.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;<span class="host">token</span>js/html2canvas.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;<span class="host">token</span>js/feedback.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    Feedback({
+        url: &#39;<span class="host">token</span>api/feedback&#39;,
+        apikey: &#39;<span class="project-token">token</span>&#39;
+    });
+&lt;/script&gt;
+</code>
+</pre>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
       <!-- Bootstrap core JavaScript
          ================================================== -->
       <!-- Placed at the end of the document so the pages load faster -->
       <script src="./js/jquery.1.11.0.min.js"></script>
       <script src="./js/bootstrap.min.js"></script>
       <script src="./js/docs.min.js"></script>
-      
       <script>
       $(document).ready(function(){
     	  //初始化
@@ -132,6 +161,8 @@
     		//  window.location.href="/project";
     		//  clearTimeout();
     	 // },3000);
+    	  
+
       });
       
       //创建项目
@@ -164,7 +195,13 @@
          return null;
       }
       
-      
+      $('#scriptModel').on('shown.bs.modal', function (e) {
+    	  e.preventDefault();
+    	  var host = location.protocol + '//' + location.host + '/';
+    	  $('span.host').text(host);
+    	  $('span.project-token').text($(e.relatedTarget).data('token'));
+      });
       </script>
+      
    </body>
 </html>

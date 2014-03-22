@@ -35,7 +35,7 @@ public class ProjectMgrImpl implements ProjectMgr {
 
     @Override
     public Project get(Long id) {
-        return projectDao.getOne(id);
+        return projectDao.findOne(id);
     }
 
     @Override

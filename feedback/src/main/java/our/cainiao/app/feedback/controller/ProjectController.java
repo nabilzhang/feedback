@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import our.cainiao.app.feedback.bo.Project;
 import our.cainiao.app.feedback.form.ListRequestForm;
 import our.cainiao.app.feedback.service.ProjectMgr;
+import our.cainiao.app.feedback.utils.ScriptUtil;
 
 /**
  * 项目Controller
@@ -76,6 +77,19 @@ public class ProjectController extends BaseController {
         }
         projectMgr.delete(projectId);
         return buildSuccess(null);
+    }
+    
+    @RequestMapping(value = "/{projectId}/script", method = RequestMethod.GET)
+    @ResponseBody
+    public Object getScript(@PathVariable Long projectId,
+            HttpServletRequest request) {
+        Project project = projectMgr.get(projectId);
+        String path = request.getContextPath();
+        String script = ScriptUtil.getScript(project.getToken(),
+                request.getScheme() + "://" + request.getServerName() + ":"
+                        + request.getServerPort() + path + "/");
+        LOG.info(script);
+        return buildSuccess(script);
     }
 
 }
