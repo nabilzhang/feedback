@@ -77,7 +77,7 @@
                      <tbody>
                         <c:forEach items="${projects.content}" var="project">
                            <tr>
-                           <td><a href="/feedback?projectId=<c:out value="${project.id}"/>"><c:out value="${project.name}"/></a></td>
+                           <td><a href="/feedbacks?projectId=<c:out value="${project.id}"/>"><c:out value="${project.name}"/></a></td>
                            <td><c:out value="${project.abstractContent}"/></td>
                            <td><c:out value="${project.createdTime}"/></td>
                            <td><c:out value="${project.token}"/></td>

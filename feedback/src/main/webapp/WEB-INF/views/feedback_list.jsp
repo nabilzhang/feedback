@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <html lang="zh-cn">
    <head>
@@ -48,36 +49,22 @@
                </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-               <h1 class="page-header">项目管理</h1>
-               <div class="panel panel-default">
-               
-               <div class="panel-heading" id="project_panel_header">
-                    <button type="button" class="btn btn-primary" id="create_btn">新建</button>
-               </div>
-                <div class="panel-body" id="create_project_panel">
-                    <form>
-                        <input type="text" name="name" class="form-control" placeholder="项目名称" required autofocus />
-                        <textarea name="abstractContent" class="form-control" placeholder="项目简介" required ></textarea>
-                        <button class="btn btn-primary" id="confirm" type="button">完成</button>
-                        <button class="btn btn-default" id="cancel" type="button">取消</button>
-                    </form>
-                    <div id="warning" class="alert alert-danger"></div>
-                </div>
+               <h1 class="page-header">反馈列表</h1>
                <div class="table-responsive" id="table-wrap">
                   <table class="table table-hover">
                      <thead style="background:#f5f5f5">
                         <tr>
                            <th>标题</th>
                            <th>时间</th>
-                           <th>操作</th>
+                           <th>缩略图</th>
                         </tr>
                      </thead>
                      <tbody>
                         <c:forEach items="${page.content}" var="feedback">
                             <tr>
                            <td><c:out value="${feedback.title}"/></td>
-                           <td><c:out value="${feedback.createdTime}"/></td>
-                           <td><a href=""><span class="glyphicon glyphicon-remove"></span></a></td>
+                           <td><fmt:formatDate value="${feedback.createdTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                           <td><img width="40" height="30" src="<c:out value="${feedback.image}"/>"/></td>
                         </tr>
                         </c:forEach>
                      </tbody>
