@@ -2,6 +2,7 @@ package our.cainiao.app.feedback.controller;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -25,6 +26,8 @@ import our.cainiao.app.feedback.service.ProjectMgr;
 @RequestMapping(value = "/api")
 public class APIController extends BaseController {
 
+    private Logger LOG = getLogger();
+
     @Autowired
     private FeedBackMgr feedBackMgr;
 
@@ -35,6 +38,9 @@ public class APIController extends BaseController {
     @ResponseBody
     public Object feedback(FeedBackAPIForm feedBackAPIForm,
             HttpServletResponse response) {
+        LOG.info(">> api->feedback() < GOT PARAMS {}", feedBackAPIForm);
+        ;
+
         // 跨域
         accessControll(response);
 
@@ -58,6 +64,8 @@ public class APIController extends BaseController {
         feedback.setTitle(feedBackAPIForm.getTitle());
         feedback.setImage(feedBackAPIForm.getImage());
         feedback.setProjectId(project.getId());
+        feedback.setEmail(feedBackAPIForm.getEmail());
+        feedback.setNick(feedBackAPIForm.getNick());
 
         feedBackMgr.create(feedback);
 

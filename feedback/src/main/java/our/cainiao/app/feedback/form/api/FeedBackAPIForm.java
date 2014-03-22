@@ -15,6 +15,10 @@ public class FeedBackAPIForm {
 
     private String token;// token
 
+    private String email;// 邮箱
+
+    private String nick;// 称呼
+
     public String getTitle() {
         return title;
     }
@@ -47,10 +51,27 @@ public class FeedBackAPIForm {
         this.token = token;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getNick() {
+        return nick;
+    }
+
+    public void setNick(String nick) {
+        this.nick = nick;
+    }
+
     @Override
     public String toString() {
         return "FeedBackAPIForm [title=" + title + ", content=" + content
-                + ", image=" + image + ", token=" + token + "]";
+                + ", image=" + image + ", token=" + token + ", email=" + email
+                + ", nick=" + nick + "]";
     }
 
 }

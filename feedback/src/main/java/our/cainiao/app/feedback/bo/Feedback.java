@@ -30,6 +30,14 @@ public class Feedback extends BaseBo {
     @Column(name = "image")
     private String image;
 
+    /** 昵称 */
+    @Column(name = "nick")
+    private String nick;
+
+    /** 昵称 */
+    @Column(name = "email")
+    private String email;
+
     public String getTitle() {
         return title;
     }
@@ -62,6 +70,21 @@ public class Feedback extends BaseBo {
         this.image = image;
     }
 
+    public String getNick() {
+        return nick;
+    }
+
+    public void setNick(String nick) {
+        this.nick = nick;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
     
 
 }
