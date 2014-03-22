@@ -7,7 +7,7 @@
       <meta name="description" content="">
       <meta name="author" content="">
       <link rel="shortcut icon" href="">
-      <title>百度倾听</title>
+      <title>百度-集智</title>
       <!-- Bootstrap core CSS -->
       <link href="../css/bootstrap.min.css" rel="stylesheet">
       <link href="../css/bootstrap-theme.min.css" rel="stylesheet">
