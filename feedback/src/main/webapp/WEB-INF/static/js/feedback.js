@@ -1,3 +1,5 @@
+
+
 /*
  feedback.js <http://experiments.hertzen.com/jsfeedback/>
  Copyright (c) 2012 Niklas von Hertzen. All rights reserved.
@@ -5,6 +7,7 @@
 
  Released under MIT License
 */
+
 (function (window, document, undefined) {
     if (window.Feedback !== undefined) {
         return;
@@ -39,10 +42,13 @@
         var item;
         while (((item = el.firstChild) !== null ? el.removeChild(item) : false)) { }
     },
-    element = function (name, text) {
+    element = function (name, text, css) {
         var el = document.createElement(name);
         if (text) {
             el.appendChild(document.createTextNode(text));
+        }
+        if(css) {
+            el.className = css;
         }
         return el;
     },
@@ -84,18 +90,18 @@
         options = options || {};
 
         // default properties
-        options.label = options.label || "Send Feedback";
-        options.header = options.header || "Send Feedback";
+        options.label = options.label || "意见反馈";
+        options.header = options.header || "意见反馈 ";
         options.url = options.url || "/";
         options.adapter = options.adapter || new window.Feedback.XHR(options);
 
-        options.nextLabel = options.nextLabel || "Continue";
-        options.reviewLabel = options.reviewLabel || "Review";
-        options.sendLabel = options.sendLabel || "Send";
-        options.closeLabel = options.closeLabel || "Close";
+        options.nextLabel = options.nextLabel || "下一步";
+        options.reviewLabel = options.reviewLabel || "预览";
+        options.sendLabel = options.sendLabel || "发送";
+        options.closeLabel = options.closeLabel || "关闭";
 
-        options.messageSuccess = options.messageSuccess || "Your feedback was sent succesfully.";
-        options.messageError = options.messageError || "There was an error sending your feedback to the server.";
+        options.messageSuccess = options.messageSuccess || "发送成功！";
+        options.messageError = options.messageError || "发送失败";
 
 
         if (options.pages === undefined) {
@@ -207,6 +213,8 @@
                 modal.appendChild(modalFooter);
 
                 document.body.appendChild(modal);
+                // FIXME to enable draggable
+//                draggable(modal);
             },
 
 
@@ -326,20 +334,26 @@
             {
                 type: "input",
                 name: "UserName",
-                label: "Your Name",
+                label: "称呼",
                 required: true
             },
             {
                 type: "input",
-                name: "ContactEmail",
-                label: "Email",
+                name: "Email",
+                label: "联系邮件",
                 required: true
+            },
+            {
+                type: "input",
+                name: "Title",
+                label: "标题",
+                required: false
             },
             {
                 type: "textarea",
                 name: "Issue",
-                label: "Please describe the issue you are experiencing",
-                required: false
+                label: "您想说点什么？",
+                required: true
             }
         ];
 
@@ -358,11 +372,11 @@
 
             switch (item.type) {
                 case "textarea":
-                    this.dom.appendChild(element("label", item.label + ":" + ((item.required === true) ? " *" : "")));
+                    this.dom.appendChild(element("label", item.label + ":" + ((item.required === true) ? "" : ""), 'block-label'));
                     this.dom.appendChild((item.element = document.createElement("textarea")));
                     break;
                 case "input":
-                    this.dom.appendChild(element("label", item.label + ":" + ((item.required === true) ? " *" : "")));
+                    this.dom.appendChild(element("label", item.label + ":" + ((item.required === true) ? "" : ""),'block-label'));
                     this.dom.appendChild((item.element = document.createElement("input")));
                     item.element.type = 'text';
                     break;
@@ -397,8 +411,11 @@
 
     window.Feedback.Form.prototype.data = function () {
 
-
-
+        if ( this._data !== undefined ) {
+            // return cached value
+            return this._data;
+        }
+    
         var i = 0, len = this.elements.length, item, data = {};
 
         for (; i < len; i++) {
@@ -411,29 +428,27 @@
     };
 
 
-    window.Feedback.Form.prototype.review = function (dom) {
+    window.Feedback.Form.prototype.review = function( dom ) {
 
         var i = 0, item, len = this.elements.length;
 
         for (; i < len; i++) {
-            item = this.elements[i];
-
+            item = this.elements[ i ];
+            
             if (item.element.value.length > 0) {
-                dom.appendChild(element("label", item.name + ":"));
-                dom.appendChild(document.createTextNode(item.element.value));
-                dom.appendChild(document.createElement("hr"));
+                dom.appendChild( element("label", item.label + ": ", 'label-bold') );
+                dom.appendChild( document.createTextNode( item.element.value) );
+                dom.appendChild( document.createElement( "hr" ) );
             }
-
         }
 
         return dom;
-
+         
     };
-    window.Feedback.Review = function () {
+    window.Feedback.Review = function() {
 
-        this.dom = document.createElement("div");
-        this.dom.className = "feedback-review";
-
+            this.dom = document.createElement("div");
+            this.dom.className = "feedback-review";
     };
 
     window.Feedback.Review.prototype = new window.Feedback.Page();
@@ -444,10 +459,8 @@
         emptyElements(this.dom);
 
         for (; i < len; i++) {
-
             // get preview DOM items
             pages[i].review(this.dom);
-
         }
 
         return this;
@@ -516,7 +529,6 @@
                 }
             },
             buttonClickFunction = function (e) {
-                e.preventDefault();
                 var t = e.target;
                 activeTool = t.id;
                 clearActive('tool-btn');
@@ -529,10 +541,10 @@
                     fbCanvasInstance.isDrawingMode = true;
                 }
             },
-            boxButton = element("a", "Rectangle"),
-            textButton = element("a", "Text"),
-            arrowButton = element('a', 'Arrow'),
-            freeDrawButton = element('a', 'Free Draw'),
+            boxButton = element("button", "框"),
+            textButton = element("button", "文字"),
+            arrowButton = element('button', '箭头'),
+            freeDrawButton = element('button', '画笔'),
             fbEditorContainer = document.createElement('div'),
             fbCanvasEditor = document.createElement('canvas'),
             fbStyle = fbEditorContainer.style;
@@ -562,13 +574,13 @@
 
             fbCanvasInstance.freeDrawingBrush = new fabric['PencilBrush'](fbCanvasInstance);
 
-            fbCanvasInstance.freeDrawingBrush.color = activeColor;
+            fbCanvasInstance.freeDrawingBrush.color = 'yellow';
             fbCanvasInstance.freeDrawingBrush.width = 20;
             //canvas.freeDrawingBrush.shadowBlur = parseInt(drawingShadowWidth.value, 10) || 0
 
-            document.addEventListener('keypress', function (e) {
+            document.addEventListener('keydown', function (e) {
                 var activeObject;
-                if (e.keyCode == 46) {
+                if (e.keyCode == 46 || e.keyCode == 8) {
                     activeObject = fbCanvasInstance.getActiveObject();
                     if (activeObject) {
                         fbCanvasInstance.remove(activeObject);
@@ -578,29 +590,6 @@
                     fbCanvasInstance.isDrawingMode = false;
                 }
 
-            });
-            fbEditorContainer.addEventListener('dblclick', function (e) {
-                var activeObject = fbCanvasInstance.getActiveObject(),
-                    textbox, style, bounds;
-
-                if (activeObject && activeObject instanceof fabric.Text) {
-                    bounds = activeObject.getBoundingRect();
-                    textbox = element('textarea');
-                    style = textbox.style;
-                    style.position = 'absolute';
-                    style.left = bounds.left + 'px';
-                    style.top = bounds.top + 'px';
-                    style.width = bounds.width + 'px';
-                    style.height = bounds.height + 'px';
-                    style.zIndex = 2001;
-                    textbox.value = activeObject.text;
-                    document.body.appendChild(textbox);
-                    textbox.focus();
-                    textbox.addEventListener('blur', function (e) {
-                        activeObject.setText(textbox.value);
-                        removeElements([textbox]);
-                    });
-                }
             });
 
             fbCanvasInstance.on('mouse:down', function (e) {
@@ -616,8 +605,8 @@
 
                 switch (activeTool) {
                     case textButton_id:
-                        objectToAdd = new fabric.Text(
-                           'To change text, \r\ndouble click the text.',
+                        objectToAdd = new fabric.IText(
+                           '修改文本, \r\n请双击文本框',
                             {
                                 top: startPoint.pageY,
                                 left: startPoint.pageX,
@@ -632,18 +621,18 @@
                         break;
                     case arrowButton_id:
                         objectToAdd = new fabric.Polygon([
-                           { x: 90, y: 0 },
-                           { x: 0, y: 90 },
-                           { x: 60, y: 90 },
-                           { x: 60, y: 180 },
-                           { x: 120, y: 180 },
-                           { x: 120, y: 90 },
-                           { x: 160, y: 90 },
+                            { x: 30, y: 0 },
+                            { x: 0, y: 30 },
+                            { x: 20, y: 30 },
+                            { x: 20, y: 100 },
+                            { x: 40, y: 100 },
+                            { x: 40, y: 30 },
+                            { x: 60, y: 30 },
                         ], {
                             top: startPoint.pageY,
                             left: startPoint.pageX,
                             fill: activeColor,
-                            
+                            angle:45,
                             cornerColor: 'yellow',
                             cornerSize: 12,
                             transparentCorners: false
@@ -669,8 +658,8 @@
                 switch (activeTool) {
                     case boxButton_id:
                         objectToAdd = new fabric.Rect({
-                            top: startPoint.pageY + (height / 2),
-                            left: startPoint.pageX + (width / 2),
+                            top: startPoint.pageY,
+                            left: startPoint.pageX,
                             width: width,
                             height: height,
                             stroke: activeColor,
@@ -748,13 +737,11 @@
                 btn.className = 'feedback-btn feedback-btn-small color-btn';
                 palette.appendChild(colors[i]);
             }
-            paletteContainer.appendChild(element('label', 'Colors'));
+            paletteContainer.appendChild(element('label', '颜色'));
             paletteContainer.appendChild(palette);
             this.dom.appendChild(paletteContainer);
-            this.dom.appendChild(element("p", "Make your change to the page."));
+            this.dom.appendChild(element("p", "画图工具"));
 
-
-            // add highlight and blackout buttons
             for (i = 0, l = buttonItem.length; i < l; i++) {
                 buttonItem[i].className = 'feedback-btn feedback-btn-small tool-btn';
 
@@ -854,7 +841,7 @@
             // to avoid security error break for tainted canvas   
             try {
                 // cache and return data
-                return (this._data = this.h2cCanvas.toDataURL());
+                return (this._data = this.h2cCanvas.toDataURL('image/jpeg',0.5));
             } catch (e) { }
 
         }
@@ -874,7 +861,9 @@
     };
     window.Feedback.XHR = function (options) {
 
-        this.xhr = new XMLHttpRequest();
+        this.xhr = window.XMLHttpRequest
+            ? new XMLHttpRequest()
+            : (window.window.XDomainRequest ? new window.XDomainRequest() : new ActiveXObject('Microsoft.XMLHTTP'));
         this.url = options.url;
         this.apikey = options.apikey;
     };
@@ -884,6 +873,14 @@
     window.Feedback.XHR.prototype.send = function (data, callback) {
 
         var xhr = this.xhr;
+
+        function formatData(data) {
+            var query = [];
+            for (var key in data) {
+                query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
+            }
+            return query.join('&');
+        };
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4) {
@@ -896,11 +893,19 @@
         console.log(data);
         //xhr.send("data=" + encodeURIComponent(window.JSON.stringify(data)));
         //xhr.send(window.JSON.stringify());
-        $.post(this.url, { liscense: data.apikey, "img": data[1], "comment": data[0].Issue, 'username': data[0].UserName, "email": data[0].ContactEmail, "title": data[0].UserName, "id": 0 }).success(function () {
-            callback(true);
-        }).error(function () {
-            callback(true);
-        });
+        xhr.open('POST', this.url, true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+//        xhr.send( "data=" + encodeURIComponent( window.JSON.stringify(data) ) );
+        var formData = data[0];
+        xhr.send(formatData({
+            title: formData.Title,
+            content: formData.Issue,
+            token: this.apikey,
+            email: formData.Email,
+            nick: formData.UserName,
+            image: data[1]
+        }));
+//        window.open(data[1]);
     };
 })(window, document);
 
