@@ -67,28 +67,22 @@
                   <table class="table table-hover">
                      <thead style="background:#f5f5f5">
                         <tr>
-                           <th>名称</th>
-                           <th>简介</th>
-                           <th>创建时间</th>
-                           <th>token</th>
+                           <th>标题</th>
+                           <th>时间</th>
                            <th>操作</th>
                         </tr>
                      </thead>
                      <tbody>
-                        <c:forEach items="${projects.content}" var="project">
-                           <tr>
-                           <td><a href="/feedback?projectId=<c:out value="${project.id}"/>"><c:out value="${project.name}"/></a></td>
-                           <td><c:out value="${project.abstractContent}"/></td>
-                           <td><c:out value="${project.createdTime}"/></td>
-                           <td><c:out value="${project.token}"/></td>
+                        <c:forEach items="${page.content}" var="feedback">
+                            <tr>
+                           <td><c:out value="${feedback.title}"/></td>
+                           <td><c:out value="${feedback.createdTime}"/></td>
                            <td><a href=""><span class="glyphicon glyphicon-remove"></span></a></td>
                         </tr>
                         </c:forEach>
                      </tbody>
                   </table>
                   <ul class="pagination">
-                        <li><a href="?pageNo=<c:out value="{projects.getNumber()}"/>">&laquo;</a></li>
-                        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
                   </ul>
                </div>
                <!-- table-responsive  end -->

@@ -35,8 +35,7 @@ public class ProjectMgrImpl implements ProjectMgr {
 
     @Override
     public Project get(Long id) {
-        // TODO Auto-generated method stub
-        return null;
+        return projectDao.getOne(id);
     }
 
     @Override
@@ -44,6 +43,11 @@ public class ProjectMgrImpl implements ProjectMgr {
         PageRequest pageRequest = new PageRequest(page, pageSize);
 
         return projectDao.findByCreatedBy(userId, pageRequest);
+    }
+
+    @Override
+    public Project getByToken(String token) {
+        return projectDao.findByToken(token);
     }
 
 }

@@ -1,5 +1,7 @@
 package our.cainiao.app.feedback.dao;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,5 +15,12 @@ import our.cainiao.app.feedback.bo.Feedback;
  */
 @Repository
 public interface FeedbackDao extends JpaRepository<Feedback, Long> {
-
+    /**
+     * 根据项目和分页查询
+     * 
+     * @param projectId
+     * @param pageable
+     * @return
+     */
+    public Page<Feedback> findByProjectId(long projectId, Pageable pageable);
 }

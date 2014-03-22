@@ -36,4 +36,12 @@ public interface ProjectMgr {
      */
     public Page<Project> listByUser(Long userId, int page, int pageSize);
 
+    /**
+     * 根据Token拿出项目
+     * 
+     * @param token
+     * @return
+     */
+    public Project getByToken(String token);
+
 }

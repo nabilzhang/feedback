@@ -1,5 +1,7 @@
 package our.cainiao.app.feedback.service;
 
+import org.springframework.data.domain.Page;
+
 import our.cainiao.app.feedback.bo.Feedback;
 
 /**
@@ -15,5 +17,13 @@ public interface FeedBackMgr {
      * @param feedback
      */
     public void create(Feedback feedback);
+
+    /**
+     * 查找反馈列表
+     * 
+     * @param projectId
+     * @return
+     */
+    public Page<Feedback> listFeedback(long projectId, int pageNo, int pageSize);
 
 }

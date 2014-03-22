@@ -10,12 +10,13 @@
    </head>
    <body>
     <form id="testform" action="http://localhost:8080/api/feedback" method="post">
-		<label>标题<input name="title" type="text"/></label><br/>
-		<input onclick="create();" type="button"/>
+		<label>标题<input name="title" type="text" /></label><br/>
+		<input type="hidden" name="token"  value="ceeadf142b55f1617dcbf81a2a76ebf2">
+		<input onclick="create();" type="button" value="提交"/>
 	</form>
 	<script>
 		function create(){
-			$.post( "http://localhost:8080/api/feedback", $( "#testform" ).serialize(), function(data){
+			$.post( "http://feedback_0-0-0-1.jpaas-idea.baidu.com/api/feedback", $( "#testform" ).serialize(), function(data){
 				alert(data.success);
 			} );
 		}

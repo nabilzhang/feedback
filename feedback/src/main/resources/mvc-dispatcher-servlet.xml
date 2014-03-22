@@ -60,6 +60,7 @@
 			<mvc:mapping path="/user/**" />
 			<mvc:mapping path="/project/**" />
 			<mvc:mapping path="/project" />
+			<mvc:mapping path="/feedbacks" />
 			<bean class="our.cainiao.app.feedback.interceptors.AuthInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>

@@ -25,4 +25,12 @@ public interface ProjectDao extends JpaRepository<Project, Long> {
      */
     public Page<Project> findByCreatedBy(Long createdBy, Pageable pageable);
 
+    /**
+     * 根据token查找
+     * 
+     * @param token
+     * @return
+     */
+    public Project findByToken(String token);
+
 }
