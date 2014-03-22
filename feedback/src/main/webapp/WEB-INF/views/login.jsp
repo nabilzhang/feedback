@@ -7,7 +7,7 @@
       <meta name="description" content="">
       <meta name="author" content="">
       <link rel="shortcut icon" href="">
-      <title>集智-集万千智慧</title>
+      <title>百度倾听</title>
       <!-- Bootstrap core CSS -->
       <link href="../css/bootstrap.min.css" rel="stylesheet">
       <link href="../css/bootstrap-theme.min.css" rel="stylesheet">
@@ -15,14 +15,14 @@
       <link href="../css/login.css" rel="stylesheet">
    </head>
    <body>
-      <div class="container form-signin-container">
-         <h2 class="form-signin-heading center">集智-集万千智慧</h2>
+      <div class="container form-signin-container" style="padding-bottom:10px;">
+      <h2 class="text-center form-signin-heading">系统登录</h2>
          <!-- Nav tabs -->
          <ul class="nav nav-tabs" id="login_tab">
             <li class="active"><a href="#login" data-toggle="tab">登录</a></li>
             <li><a href="#signup" data-toggle="tab">注册</a></li>
          </ul>
-         <div class="tab-content">
+         <div class="tab-content" style="background:#ffffff;border:1px solid #ddd;border-top:0;">
             <div class="tab-pane fade in active" id="login">
                 <form class="form-signin" role="form">
                     <input type="email" name="email" class="form-control" placeholder="邮箱" required autofocus />

@@ -22,10 +22,10 @@
       <![endif]-->
    </head>
    <body>
-      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" style="background:#3f4145" role="navigation">
          <div class="container-fluid">
-            <div class="navbar-header">
-               <a class="navbar-brand" href="/index.html">集智-集万千智慧</a>
+            <div class="navbar-header" >
+                <img alt="" src="../img/logo.png">
             </div>
             <div class="navbar-collapse collapse">
                <ul class="nav navbar-nav navbar-right">
@@ -64,9 +64,7 @@
                     </form>
                     <div id="warning" class="alert alert-danger"></div>
                 </div>
-                <c:if test="${success}" > 
-                    <div id="suc" class="alert alert-success">创建项目成功</div>
-                </c:if>
+                <div id="success_tip" class="alert alert-success">操作成功</div>
                 
                <div class="table-responsive" id="table-wrap">
                   <table class="table table-hover">
@@ -125,7 +123,15 @@
           });
     	  
     	  //成功
-          $.param()
+          $("#success_tip").hide();
+    	  //if(getQuery("success") == "true"){
+    		//  $("#success_tip").show();
+    	  //}
+    	  //等一会儿要消失提示
+    	  //setTimeout(function(){
+    		//  window.location.href="/project";
+    		//  clearTimeout();
+    	 // },3000);
       });
       
       //创建项目
@@ -147,6 +153,15 @@
     	  }).done(function(){
     		  window.location.href="?success=true";		  
     	  });
+      }
+      //获取一个QueryString
+      function getQuery(name) 
+      {
+         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+         var r = window.location.search.substr(1).match(reg);
+         if (r != null)
+             return unescape(r[2]);
+         return null;
       }
       
       
