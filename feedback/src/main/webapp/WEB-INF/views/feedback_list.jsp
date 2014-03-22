@@ -61,7 +61,7 @@
                            <th>截图</th>
                            <th>用户</th>
                            <th>邮箱</th>
-                           <th>时间</th>
+                           <th>评论内容</th>
                         </tr>
                      </thead>
                      <tbody>
@@ -73,7 +73,8 @@
                             </td>
                            <td><c:out value="${feedback.nick}"/></td>
                            <td><c:out value="${feedback.email}"/></td>
-                           <td><fmt:formatDate value="${feedback.createdTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                           <td><c:out value="${feedback.content}"/></td>
+                           <!-- <td><fmt:formatDate value="${feedback.createdTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td> -->
                         </tr>
                         </c:forEach>
                      </tbody>
