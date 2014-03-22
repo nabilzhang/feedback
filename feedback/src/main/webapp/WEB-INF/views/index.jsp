@@ -57,7 +57,7 @@
                 <div class="panel-body" id="create_project_panel">
                     <form>
                         <input type="text" name="name" class="form-control" placeholder="项目名称" required autofocus />
-                        <input type="email" name="emailList" class="form-control" placeholder="邮件列表" required autofocus />
+                        <input type="email" name="emailList" class="form-control" placeholder="邮件列表" required />
                         <textarea name="abstractContent" class="form-control" placeholder="项目简介" required ></textarea>
                         <button class="btn btn-primary" id="confirm" type="button">完成</button>
                         <button class="btn btn-default" id="cancel" type="button">取消</button>
@@ -86,7 +86,7 @@
                            <td><c:out value="${project.abstractContent}"/></td>
                            <td><c:out value="${project.createdTime}"/></td>
                            <td><c:out value="${project.token}"/></td>
-                           <td><a href=""><span class="glyphicon glyphicon-remove"></span></a></td>
+                           <td><a href="javascript:void(0);" onclick="delete_project(<c:out value="${project.id}"/>)"><span class="glyphicon glyphicon-remove"></span></a></td>
                         </tr>
                         </c:forEach>
                      </tbody>
@@ -137,6 +137,15 @@
     		  } else {
     			  $("#warning").text(data.errMsg).show();
     		  }
+    	  });
+      }
+      //删除项目
+      function delete_project(id){
+    	  $.ajax({
+    		  url: "/project/"+id,
+    		  type:"delete",
+    	  }).done(function(){
+    		  window.location.href="?success=true";		  
     	  });
       }
       

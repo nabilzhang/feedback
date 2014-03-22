@@ -50,4 +50,9 @@ public class ProjectMgrImpl implements ProjectMgr {
         return projectDao.findByToken(token);
     }
 
+    @Override
+    public void delete(Long projectId) {
+        projectDao.delete(projectId);
+    }
+
 }

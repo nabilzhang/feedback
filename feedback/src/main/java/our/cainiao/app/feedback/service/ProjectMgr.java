@@ -44,4 +44,12 @@ public interface ProjectMgr {
      */
     public Project getByToken(String token);
 
+    /**
+     * 删除
+     * 
+     * @param projectId
+     * @return
+     */
+    public void delete(Long projectId);
+
 }

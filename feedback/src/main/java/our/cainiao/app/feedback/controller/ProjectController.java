@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -65,6 +66,16 @@ public class ProjectController extends BaseController {
         model.addAttribute("projects", projectPage);
         model.addAttribute("success", request.getAttribute("success"));
         return "index";
+    }
+
+    @RequestMapping(value = "/{projectId}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public Object delete(@PathVariable Long projectId) {
+        if (projectId == null) {
+            return buildFailed("参数错误");
+        }
+        projectMgr.delete(projectId);
+        return buildSuccess(null);
     }
 
 }
