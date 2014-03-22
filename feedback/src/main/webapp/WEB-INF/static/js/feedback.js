@@ -520,7 +520,7 @@
             red_id = 'active_fb_red';
             yellow_id = 'active_fb_yellow';
             blue_id = 'active_fb_blue';
-            activeColor = black_id,
+            activeColor = 'yellow',
             clearActive = function (buttonCls) {
                 var buttons = $this.dom.getElementsByClassName(buttonCls);
 
@@ -580,7 +580,7 @@
 
             document.addEventListener('keydown', function (e) {
                 var activeObject;
-                if (e.keyCode == 46 || e.keyCode == 8) {
+                if (e.keyCode == 46 && e.target.tagName !== 'TEXTAREA') {
                     activeObject = fbCanvasInstance.getActiveObject();
                     if (activeObject) {
                         fbCanvasInstance.remove(activeObject);

@@ -9,7 +9,7 @@
       <meta name="description" content="">
       <meta name="author" content="">
       <link rel="shortcut icon" href="">
-      <title>集智-集万千智慧</title>
+      <title>百度-集智</title>
       <!-- Bootstrap core CSS -->
       <link href="./css/bootstrap.min.css" rel="stylesheet">
       <!-- Custom styles for this template -->
@@ -24,10 +24,10 @@
       <![endif]-->
    </head>
    <body>
-      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" style="background:#3f4145" role="navigation">
          <div class="container-fluid">
-            <div class="navbar-header">
-               <a class="navbar-brand" href="/index.html">集智-集万千智慧</a>
+            <div class="navbar-header" >
+                <img alt="" src="../img/logo.png">
             </div>
             <div class="navbar-collapse collapse">
                <ul class="nav navbar-nav navbar-right">
