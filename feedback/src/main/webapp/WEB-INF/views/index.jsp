@@ -42,7 +42,7 @@
          <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                <ul class="nav nav-sidebar nav-pills nav-stacked">
-                  <li class="active"><a href="#">项目</a></li>
+                  <li class="active"><a href="">项目</a></li>
                   <li><a href="#">开放平台</a></li>
                   <li><a href="#">设置</a></li>
                </ul>
@@ -57,12 +57,17 @@
                 <div class="panel-body" id="create_project_panel">
                     <form>
                         <input type="text" name="name" class="form-control" placeholder="项目名称" required autofocus />
+                        <input type="email" name="emailList" class="form-control" placeholder="邮件列表" required autofocus />
                         <textarea name="abstractContent" class="form-control" placeholder="项目简介" required ></textarea>
                         <button class="btn btn-primary" id="confirm" type="button">完成</button>
                         <button class="btn btn-default" id="cancel" type="button">取消</button>
                     </form>
                     <div id="warning" class="alert alert-danger"></div>
                 </div>
+                <c:if test="${success}" > 
+                    <div id="suc" class="alert alert-success">创建项目成功</div>
+                </c:if>
+                
                <div class="table-responsive" id="table-wrap">
                   <table class="table table-hover">
                      <thead style="background:#f5f5f5">
@@ -86,10 +91,6 @@
                         </c:forEach>
                      </tbody>
                   </table>
-                  <ul class="pagination">
-                        <li><a href="?pageNo=<c:out value="{projects.getNumber()}"/>">&laquo;</a></li>
-                        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                  </ul>
                </div>
                <!-- table-responsive  end -->
             </div>
@@ -122,6 +123,9 @@
         	  $("#create_project_panel form")[0].reset();
         	  $("#create_project_panel").hide();
           });
+    	  
+    	  //成功
+          $.param()
       });
       
       //创建项目
@@ -129,7 +133,7 @@
     	  $("#warning").hide();
     	  $.post( "/project",  $("#create_project_panel form").serialize(), function(data){
     		  if(data.success){
-    			  window.location.href="";
+    			  window.location.href="?success=true";
     		  } else {
     			  $("#warning").text(data.errMsg).show();
     		  }

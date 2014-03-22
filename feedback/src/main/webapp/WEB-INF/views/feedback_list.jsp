@@ -14,6 +14,7 @@
       <link href="./css/bootstrap.min.css" rel="stylesheet">
       <!-- Custom styles for this template -->
       <link href="./css/dashboard.css" rel="stylesheet">
+      <link href="./css/lightbox.css" rel="stylesheet" />
       <!-- Just for debugging purposes. Don't actually copy this line! -->
       <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
       <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -43,28 +44,36 @@
          <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                <ul class="nav nav-sidebar nav-pills nav-stacked">
-                  <li class="active"><a href="#">项目</a></li>
+                  <li class="active"><a href="/project">项目</a></li>
                   <li><a href="#">开放平台</a></li>
                   <li><a href="#">设置</a></li>
                </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+               <a type="button" class="btn btn-link pull-right" href="/project">返回项目</a>
                <h1 class="page-header">反馈列表</h1>
+               
                <div class="table-responsive" id="table-wrap">
-                  <table class="table table-hover">
-                     <thead style="background:#f5f5f5">
+                  <table class="table table-hover table-striped">
+                     <thead>
                         <tr>
                            <th>标题</th>
+                           <th>截图</th>
+                           <th>用户</th>
+                           <th>邮箱</th>
                            <th>时间</th>
-                           <th>缩略图</th>
                         </tr>
                      </thead>
                      <tbody>
                         <c:forEach items="${page.content}" var="feedback">
                             <tr>
                            <td><c:out value="${feedback.title}"/></td>
+                           <td><a data-lightbox="roadtrip"  href="<c:out value="${feedback.image}"/>">
+                            <img style="width:10em;heigth:8em;" src="<c:out value="${feedback.image}"/>"/></a>
+                            </td>
+                           <td><c:out value="${feedback.nick}"/></td>
+                           <td><c:out value="${feedback.email}"/></td>
                            <td><fmt:formatDate value="${feedback.createdTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                           <td><img width="40" height="30" src="<c:out value="${feedback.image}"/>"/></td>
                         </tr>
                         </c:forEach>
                      </tbody>
@@ -83,6 +92,7 @@
       <script src="./js/jquery.1.11.0.min.js"></script>
       <script src="./js/bootstrap.min.js"></script>
       <script src="./js/docs.min.js"></script>
+      <script src="./js/lightbox-2.6.min.js"></script>
       
       <script>
       $(document).ready(function(){

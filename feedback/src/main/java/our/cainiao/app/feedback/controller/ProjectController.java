@@ -63,6 +63,7 @@ public class ProjectController extends BaseController {
         Page<Project> projectPage = projectMgr.listByUser(userId,
                 form.getPageNo(), form.getPageSize());
         model.addAttribute("projects", projectPage);
+        model.addAttribute("success", request.getAttribute("success"));
         return "index";
     }
 

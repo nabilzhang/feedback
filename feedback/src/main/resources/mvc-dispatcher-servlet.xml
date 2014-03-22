@@ -53,6 +53,7 @@
 	<mvc:resources mapping="/**.html" location="/WEB-INF/static/" />
 	<mvc:resources mapping="/css/**" location="/WEB-INF/static/css/" />
 	<mvc:resources mapping="/js/**" location="/WEB-INF/static/js/" />
+	<mvc:resources mapping="/img/**" location="/WEB-INF/static/img/" />
 	<mvc:resources mapping="/fonts/**" location="/WEB-INF/static/fonts/" />
 
 	<mvc:interceptors>
