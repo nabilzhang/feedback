@@ -66,7 +66,7 @@ public class ProjectController extends BaseController {
                 form.getPageNo(), form.getPageSize());
         model.addAttribute("projects", projectPage);
         model.addAttribute("success", request.getAttribute("success"));
-        return "index";
+        return "project_list";
     }
 
     @RequestMapping(value = "/{projectId}", method = RequestMethod.DELETE)

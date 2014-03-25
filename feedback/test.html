@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-   <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="description" content="">
-      <meta name="author" content="">
-	  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-   </head>
-   <body>
-    <form id="testform" action="http://localhost:8080/api/feedback" method="post">
-		<label>标题<input name="title" type="text" /></label><br/>
-		<input type="hidden" name="token"  value="ceeadf142b55f1617dcbf81a2a76ebf2">
-		<input onclick="create();" type="button" value="提交"/>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+	<form id="testform" action="http://localhost:8080/api/feedback"
+		method="post">
+		<label>标题<input name="title" type="text" /></label><br /> <input
+			type="hidden" name="token" value="ceeadf142b55f1617dcbf81a2a76ebf2">
+		<input onclick="create();" type="button" value="提交" />
 	</form>
 	<script>
 		function create(){
@@ -21,5 +22,11 @@
 			} );
 		}
 	</script>
-   </body>
+	<script>
+    var FEED_BACK_HOST='http://localhost:8080';
+    var FEED_BACK_TOKEN='06765ca1f587887be7fdab114f4d8be8';
+    </script>
+	<script src="http://localhost:8080/js/api.js"></script>
+
+</body>
 </html>
