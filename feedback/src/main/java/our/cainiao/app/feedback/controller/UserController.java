@@ -1,6 +1,8 @@
 package our.cainiao.app.feedback.controller;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,15 +68,44 @@ public class UserController extends BaseController {
      */
     @RequestMapping("/logon")
     @ResponseBody
-    public Object login(User user, HttpServletRequest request) {
-        LOG.info(">> logon() > Got Param : '{}'", user);
+    public Object login(UserForm userForm, HttpServletRequest request,
+            HttpServletResponse response) {
+        LOG.info(">> logon() > Got Param : '{}'", userForm);
+        User user = userForm.getUser();
         boolean isLogin = userMgr.login(user);
         if(isLogin){
-            user = userMgr.getByEmail(user.getEmail());
+            user = userMgr.getByEmail(userForm.getEmail());
             request.getSession().setAttribute(Constants.USER_SESSION, user);
+            // 记住我
+            rememberMe(userForm, response, user);
             return buildSuccess(null);
         } else {
             return buildFailed("用户名或密码错误");
+        }
+    }
+
+    /**
+     * 记住我功能
+     * 
+     * @param userForm
+     * @param response
+     * @param user
+     */
+    private void rememberMe(UserForm userForm, HttpServletResponse response,
+            User user) {
+        // 选了记住我则需要保留
+        if (userForm.getRememberMe() != null) {
+            Cookie cookie = new Cookie(Constants.REMEBER_ME_COOKIE_KEY,
+                    user.getEmail());
+            cookie.setMaxAge(60 * 60 * 24 * 30);// 保留30天
+            cookie.setPath("/");
+            response.addCookie(cookie);
+        } else {
+            Cookie cookie = new Cookie(Constants.REMEBER_ME_COOKIE_KEY,
+                    null);
+            cookie.setMaxAge(0);// 保留30天
+            cookie.setPath("/");
+            response.addCookie(cookie);
         }
     }
 

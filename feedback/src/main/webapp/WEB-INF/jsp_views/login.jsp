@@ -27,7 +27,7 @@
                 <form class="form-signin" role="form">
                     <input type="email" name="email" class="form-control" placeholder="邮箱" required autofocus />
                     <input type="password" name="password" class="form-control" placeholder="密码" required>
-                    <label class="checkbox"><input type="checkbox" value="remember-me"> 记住我</label>
+                    <label class="checkbox"><input type="checkbox" name="rememberMe" value="remember-me"> 记住我</label>
                     <button class="btn btn-lg btn-primary btn-block" type="button" onclick="login()">登陆</button>
                  </form>
             </div>

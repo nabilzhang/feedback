@@ -10,4 +10,7 @@ package our.cainiao.app.feedback.constants;
 public class Constants {
     /** Session用户 */
     public final static String USER_SESSION = "user";
+
+    /** 记住我的cookie的key */
+    public final static String REMEBER_ME_COOKIE_KEY = "email";
 }

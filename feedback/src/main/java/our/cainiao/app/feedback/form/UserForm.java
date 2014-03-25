@@ -1,4 +1,7 @@
 package our.cainiao.app.feedback.form;
+
+import our.cainiao.app.feedback.bo.User;
+
 /**
  *
  *
@@ -9,6 +12,7 @@ public class UserForm {
     private String email;
     private String password;
     private String rePassword;
+    private String rememberMe;// 登录的记住我
 
     public String getEmail() {
         return email;
@@ -34,10 +38,31 @@ public class UserForm {
         this.rePassword = rePassword;
     }
 
+    public String getRememberMe() {
+        return rememberMe;
+    }
+
+    public void setRememberMe(String rememberMe) {
+        this.rememberMe = rememberMe;
+    }
+
+    /**
+     * 根据form生成User对象
+     * 
+     * @return
+     */
+    public User getUser() {
+        User user = new User();
+        user.setEmail(this.getEmail());
+        user.setPassword(this.password);
+        return user;
+    }
+
     @Override
     public String toString() {
         return "UserForm [email=" + email + ", password=" + password
                 + ", rePassword=" + rePassword + "]";
     }
+
 
 }
