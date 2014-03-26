@@ -1,4 +1,4 @@
-package our.cainiao.app.feedback.form;
+package our.cainiao.app.feedback.form.common;
 
 /**
  * list请求

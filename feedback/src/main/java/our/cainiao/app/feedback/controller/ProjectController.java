@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import our.cainiao.app.feedback.bo.Project;
-import our.cainiao.app.feedback.form.ListRequestForm;
+import our.cainiao.app.feedback.form.common.ListRequestForm;
 import our.cainiao.app.feedback.service.ProjectMgr;
 import our.cainiao.app.feedback.utils.ScriptUtil;
 

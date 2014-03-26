@@ -15,9 +15,11 @@
     http://www.springframework.org/schema/mvc
     http://www.springframework.org/schema/mvc/spring-mvc.xsd
     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    
+    <import resource="classpath:applicationContext.xml"/>
 
 	<context:component-scan base-package="our.cainiao.app.feedback" />
-	<mvc:annotation-driven />
+	<mvc:annotation-driven  validator="validator"/>
 	<bean
 		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
 		<property name="mediaTypes">

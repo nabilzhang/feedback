@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import our.cainiao.app.feedback.bo.User;
 import our.cainiao.app.feedback.constants.Constants;
-import our.cainiao.app.feedback.form.UserForm;
+import our.cainiao.app.feedback.form.user.UserLoginForm;
+import our.cainiao.app.feedback.form.user.UserRegisterForm;
 import our.cainiao.app.feedback.service.UserMgr;
 
 /**
@@ -38,7 +39,7 @@ public class UserController extends BaseController {
      */
     @RequestMapping("/register")
     @ResponseBody
-    public Object register(UserForm userForm) {
+    public Object register(UserRegisterForm userForm) {
         LOG.info(">> register() > Got Param : '{}'", userForm);
         // 校验
         if (StringUtils.isEmpty(userForm.getEmail())
@@ -68,7 +69,8 @@ public class UserController extends BaseController {
      */
     @RequestMapping("/logon")
     @ResponseBody
-    public Object login(UserForm userForm, HttpServletRequest request,
+    public Object login(UserLoginForm userForm,
+            HttpServletRequest request,
             HttpServletResponse response) {
         LOG.info(">> logon() > Got Param : '{}'", userForm);
         User user = userForm.getUser();
@@ -91,7 +93,8 @@ public class UserController extends BaseController {
      * @param response
      * @param user
      */
-    private void rememberMe(UserForm userForm, HttpServletResponse response,
+    private void rememberMe(UserLoginForm userForm,
+            HttpServletResponse response,
             User user) {
         // 选了记住我则需要保留
         if (userForm.getRememberMe() != null) {

@@ -1,4 +1,6 @@
-package our.cainiao.app.feedback.form;
+package our.cainiao.app.feedback.form.user;
+
+import javax.validation.constraints.NotNull;
 
 import our.cainiao.app.feedback.bo.User;
 
@@ -8,10 +10,12 @@ import our.cainiao.app.feedback.bo.User;
  * @author zhangbi
  * @date 2014年3月22日上午12:16:44
  */
-public class UserForm {
+public class UserLoginForm {
+    @NotNull
     private String email;
+    @NotNull
     private String password;
-    private String rePassword;
+
     private String rememberMe;// 登录的记住我
 
     public String getEmail() {
@@ -28,14 +32,6 @@ public class UserForm {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getRePassword() {
-        return rePassword;
-    }
-
-    public void setRePassword(String rePassword) {
-        this.rePassword = rePassword;
     }
 
     public String getRememberMe() {
@@ -60,9 +56,10 @@ public class UserForm {
 
     @Override
     public String toString() {
-        return "UserForm [email=" + email + ", password=" + password
-                + ", rePassword=" + rePassword + "]";
+        return "UserLoginForm [email=" + email + ", password=" + password
+                + ", rememberMe=" + rememberMe + "]";
     }
+
 
 
 }

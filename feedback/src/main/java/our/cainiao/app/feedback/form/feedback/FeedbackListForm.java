@@ -1,6 +1,6 @@
 package our.cainiao.app.feedback.form.feedback;
 
-import our.cainiao.app.feedback.form.ListRequestForm;
+import our.cainiao.app.feedback.form.common.ListRequestForm;
 
 /**
  * 反馈列表
