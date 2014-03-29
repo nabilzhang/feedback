@@ -1,9 +1,10 @@
 package our.cainiao.app.feedback.template;
+
+
 /**
- *
- *
+ * Json模板
+ * 
  * @author zhangbi
- * @email zhangbi@baidu.com
  * @date 2014年3月20日下午8:30:03
  */
 public class BaseTemplate {

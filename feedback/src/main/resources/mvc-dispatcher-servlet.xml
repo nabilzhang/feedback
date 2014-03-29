@@ -30,11 +30,14 @@
 		</property>
 		<property name="defaultViews">
 			<list>
-				<!-- ModelAndView里的数据变成JSON -->
+				<!-- @ResponseBody数据 ModelAndView里的数据转为JSON -->
 				<bean
 					class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
 			</list>
 		</property>
+	</bean>
+	
+	<bean id="handlerExceptionResolver" class="our.cainiao.app.feedback.common.FeedBackHandlerExceptionaResolver">
 	</bean>
 
 	<bean
