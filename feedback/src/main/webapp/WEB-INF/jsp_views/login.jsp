@@ -31,12 +31,12 @@
                     <button class="btn btn-lg btn-primary btn-block" type="button" onclick="login()">登陆</button>
                  </form>
             </div>
-            <div class="tab-pane fade" id="signup">
+            <div class="tab-pane fade" id="signup" >
                 <form class="form-signup" role="form">
                     <input type="email" name = "email" class="form-control" placeholder="邮箱" required autofocus />
                     <input type="password" name = "password" class="form-control" placeholder="密码" required/>
                     <input type="password" name = "rePassword" class="form-control" placeholder="重复密码" required>
-                    <button class="btn btn-lg btn-primary btn-block" type="button" onclick="register()">注册</button>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="register()">注册</button>
                  </form>
             </div>
             <div id="warning" class="alert alert-danger">

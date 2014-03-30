@@ -34,7 +34,7 @@
 									<td><c:out value="${project.abstractContent}" /></td>
 									<td><c:out value="${project.createdTime}" /></td>
 									<td><a href="#" class="btn btn-info codeshow"
-										data-token="<c:out value="${project.token}"/>"
+										data-projectid="<c:out value="${project.id}"/>"
 										data-toggle="modal" data-target="#scriptModel">查看代码</a></td>
 									<td><a href="javascript:void(0);"
 										onclick="delete_project(<c:out value="${project.id}"/>)"><span
@@ -61,16 +61,6 @@
 					<pre>
 <code>
 
-&lt;link href=&quot;<span class="host">token</span>css/feedback.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
-&lt;script src=&quot;<span class="host">token</span>js/fabric.min.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;<span class="host">token</span>js/html2canvas.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;<span class="host">token</span>js/feedback.js&quot;&gt;&lt;/script&gt;
-&lt;script type=&quot;text/javascript&quot;&gt;
-    Feedback({
-        url: &#39;<span class="host">token</span>api/feedback&#39;,
-        apikey: &#39;<span class="project-token">token</span>&#39;
-    });
-&lt;/script&gt;
 </code>
 </pre>
 				</div>
@@ -154,11 +144,10 @@
          return null;
       }
       //显示代码
-      $('#scriptModel').on('shown.bs.modal', function (e) {
-    	  e.preventDefault();
-    	  var host = location.protocol + '//' + location.host + '/';
-    	  $('span.host').text(host);
-    	  $('span.project-token').text($(e.relatedTarget).data('token'));
+      $('#scriptModel').on('show.bs.modal', function (e) {
+    	  $.get('/project/' + $(e.relatedTarget).data('projectid') + '/script',function(data){
+    		  $('code').text(data.result);
+    	  });
       });
       </script>
 </body>
