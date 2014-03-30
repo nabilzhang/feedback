@@ -59,10 +59,9 @@
 				</div>
 				<div class="modal-body">
 					<pre>
-<code>
-
-</code>
-</pre>
+						<code>
+						</code>
+					</pre>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -79,6 +78,7 @@
 	<script src="./js/jquery.1.11.0.min.js"></script>
 	<script src="./js/bootstrap.min.js"></script>
 	<script src="./js/docs.min.js"></script>
+    <script src="./js/highlight.pack.js"></script>
 	<script>
 		$(document).ready(function() {
 	        //初始化
@@ -146,7 +146,8 @@
       //显示代码
       $('#scriptModel').on('show.bs.modal', function (e) {
     	  $.get('/project/' + $(e.relatedTarget).data('projectid') + '/script',function(data){
-    		  $('code').text(data.result);
+    		  $('pre code').text(data.result);
+    		  $('pre code').each(function(i, ex) {hljs.highlightBlock(ex)});
     	  });
       });
       </script>
