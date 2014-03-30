@@ -1,19 +1,20 @@
 package our.cainiao.app.feedback.form.user;
 
-import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
 
 import our.cainiao.app.feedback.bo.User;
 
 /**
- *
- *
+ * 登录form
+ * 
  * @author zhangbi
  * @date 2014年3月22日上午12:16:44
  */
 public class UserLoginForm {
-    @NotNull
+    @NotBlank
     private String email;
-    @NotNull
+
+    @NotBlank
     private String password;
 
     private String rememberMe;// 登录的记住我

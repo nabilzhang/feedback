@@ -3,11 +3,11 @@ package our.cainiao.app.feedback.controller;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -39,15 +39,9 @@ public class UserController extends BaseController {
      */
     @RequestMapping("/register")
     @ResponseBody
-    public Object register(UserRegisterForm userForm) {
+    public Object register(@Valid UserRegisterForm userForm) {
         LOG.info(">> register() > Got Param : '{}'", userForm);
         // 校验
-        if (StringUtils.isEmpty(userForm.getEmail())
-                || StringUtils.isEmpty(userForm.getPassword())
-                || StringUtils.isEmpty(userForm.getRePassword())) {
-            return buildFailed("用户名或密码不能为空");
-        }
-        
         if (!userForm.getPassword().equals(userForm.getRePassword())) {
             return buildFailed("两遍密码不一致，请重新输入");
         }
@@ -69,7 +63,7 @@ public class UserController extends BaseController {
      */
     @RequestMapping("/logon")
     @ResponseBody
-    public Object login(UserLoginForm userForm,
+    public Object logon(@Valid UserLoginForm userForm,
             HttpServletRequest request,
             HttpServletResponse response) {
         LOG.info(">> logon() > Got Param : '{}'", userForm);
@@ -94,8 +88,7 @@ public class UserController extends BaseController {
      * @param user
      */
     private void rememberMe(UserLoginForm userForm,
-            HttpServletResponse response,
-            User user) {
+            HttpServletResponse response, User user) {
         // 选了记住我则需要保留
         if (userForm.getRememberMe() != null) {
             Cookie cookie = new Cookie(Constants.REMEBER_ME_COOKIE_KEY,
@@ -106,7 +99,7 @@ public class UserController extends BaseController {
         } else {
             Cookie cookie = new Cookie(Constants.REMEBER_ME_COOKIE_KEY,
                     null);
-            cookie.setMaxAge(0);// 保留30天
+            cookie.setMaxAge(0);// 保留0天
             cookie.setPath("/");
             response.addCookie(cookie);
         }

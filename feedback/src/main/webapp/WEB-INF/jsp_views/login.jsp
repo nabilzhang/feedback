@@ -36,7 +36,7 @@
                     <input type="email" name = "email" class="form-control" placeholder="邮箱" required autofocus />
                     <input type="password" name = "password" class="form-control" placeholder="密码" required/>
                     <input type="password" name = "rePassword" class="form-control" placeholder="重复密码" required>
-                    <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="register()">注册</button>
+                    <button class="btn btn-lg btn-primary btn-block" type="button" onClick="register()">注册</button>
                  </form>
             </div>
             <div id="warning" class="alert alert-danger">
@@ -50,6 +50,7 @@
       <!-- Placed at the end of the document so the pages load faster -->
       <script src="../js/jquery.1.11.0.min.js"></script>
       <script src="../js/bootstrap.min.js"></script>
+      <script src="../js/base_function.js"></script>
       <script>
           $(document).ready(function () {
             $("#warning").hide();
@@ -61,7 +62,7 @@
                   if(data.success){
                       window.location.href="";
                   } else {
-                	  $("#warning").text(data.errMsg).show();
+                	  $("#warning").text(getOneErrorStr(data.errMsg)).show();
                   }
               } );
           }
@@ -73,7 +74,7 @@
                   if(data.success){
                       window.location.href="/index";
                   } else {
-                	  $("#warning").text(data.errMsg).show();
+                	  $("#warning").text(getOneErrorStr(data.errMsg)).show();
                   }
               } );
           }

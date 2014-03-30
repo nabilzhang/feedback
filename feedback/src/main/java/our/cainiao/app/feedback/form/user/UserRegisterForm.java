@@ -3,10 +3,9 @@ package our.cainiao.app.feedback.form.user;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
- *
- *
+ * 注册表单
+ * 
  * @author zhangbi
- * @email zhangbi@baidu.com
  * @date 2014年3月26日下午8:29:29
  */
 public class UserRegisterForm {
