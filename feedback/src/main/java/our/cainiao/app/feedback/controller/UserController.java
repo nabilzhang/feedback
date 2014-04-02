@@ -109,4 +109,15 @@ public class UserController extends BaseController {
     public String login() {
         return "login";
     }
+
+    /**
+     * 退出登录
+     * 
+     * @return
+     */
+    @RequestMapping("/logout")
+    @ResponseBody
+    public Object logout(HttpServletRequest request) {
+        return buildSuccess(null);
+    }
 }

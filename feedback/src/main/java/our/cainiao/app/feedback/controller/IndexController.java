@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
     @RequestMapping(value = "")
     public String root(HttpServletRequest request, HttpServletResponse response) {
-        return "redirect:project";
+        return "index";
     }
 
     @RequestMapping(value = "index")
     public String index(HttpServletRequest request,
             HttpServletResponse response) {
-        return "redirect:project";
+        return "index";
     }
 }
