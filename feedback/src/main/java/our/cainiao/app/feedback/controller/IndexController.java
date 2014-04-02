@@ -23,6 +23,6 @@ public class IndexController {
     @RequestMapping(value = "index")
     public String index(HttpServletRequest request,
             HttpServletResponse response) {
-        return "index";
+        return "redirect:project";
     }
 }
