@@ -196,7 +196,8 @@
           <div class="imgbox">
             <img src="./img/intro/content3.png" />
           </div>
-          <div><a href="/project" class="myButton btn-go">进入系统</a></div>
+          <div><a target="_blank" href="/project" class="myButton btn-go">进入系统</a></div>
+          <div><a target="_blank" href="http://petshop_1.jpaas-idea.baidu.com/" class="myButton btn-go">查看Demo</a></div>
         </div>
       </div>
     </div>
