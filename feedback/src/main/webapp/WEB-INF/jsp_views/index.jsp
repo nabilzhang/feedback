@@ -194,9 +194,9 @@
       <div class="content3 box">
         <div class="wrapper">
           <div class="imgbox">
-            <img src="./img/intro/content3.png" />         
+            <img src="./img/intro/content3.png" />
           </div>
-          <div class="arrow-down"></div>
+          <div><a href="/project" class="myButton btn-go">进入系统</a></div>
         </div>
       </div>
     </div>
