@@ -15,11 +15,11 @@
     http://www.springframework.org/schema/mvc
     http://www.springframework.org/schema/mvc/spring-mvc.xsd
     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
-    
-    <import resource="classpath:applicationContext.xml"/>
+
+	<import resource="classpath:applicationContext.xml" />
 
 	<context:component-scan base-package="our.cainiao.app.feedback" />
-	<mvc:annotation-driven  validator="validator"/>
+	<mvc:annotation-driven validator="validator" />
 	<bean
 		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
 		<property name="mediaTypes">
@@ -36,8 +36,9 @@
 			</list>
 		</property>
 	</bean>
-	
-	<bean id="handlerExceptionResolver" class="our.cainiao.app.feedback.common.FeedBackHandlerExceptionaResolver">
+
+	<bean id="handlerExceptionResolver"
+		class="our.cainiao.app.feedback.common.FeedBackHandlerExceptionaResolver">
 	</bean>
 
 	<bean
@@ -63,11 +64,16 @@
 
 	<mvc:interceptors>
 		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="our.cainiao.app.feedback.interceptors.SessionInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
 			<mvc:mapping path="/user/**" />
 			<mvc:mapping path="/project/**" />
 			<mvc:mapping path="/project" />
 			<mvc:mapping path="/feedbacks" />
 			<bean class="our.cainiao.app.feedback.interceptors.AuthInterceptor" />
 		</mvc:interceptor>
+
 	</mvc:interceptors>
 </beans>
