@@ -63,6 +63,10 @@
 	<mvc:resources mapping="/fonts/**" location="/WEB-INF/static/fonts/" />
 
 	<mvc:interceptors>
+	    <mvc:interceptor>
+            <mvc:mapping path="/**" />
+            <bean class="our.cainiao.app.feedback.interceptors.PerformanceInterceptor" />
+        </mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<bean class="our.cainiao.app.feedback.interceptors.SessionInterceptor" />
