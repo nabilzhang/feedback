@@ -335,30 +335,30 @@
                 type: "input",
                 name: "UserName",
                 label: "称呼",
-                required: true
+                required: true,
+                value: '雷锋'
             },
             {
                 type: "input",
                 name: "Email",
                 label: "联系邮件",
-                required: true
+                required: false
             },
             {
                 type: "input",
                 name: "Title",
                 label: "标题",
-                required: false
+                required: true
             },
             {
                 type: "textarea",
                 name: "Issue",
                 label: "您想说点什么？",
-                required: true
+                required: false
             }
         ];
 
         this.dom = document.createElement("div");
-
     };
 
     window.Feedback.Form.prototype = new window.Feedback.Page();
@@ -381,8 +381,8 @@
                     item.element.type = 'text';
                     break;
             }
-            if (this.data[item.name]) {
-                item.element.value = item.name;
+            if (item.value) {
+                item.element.value = item.value;
             }
         }
 
@@ -589,7 +589,31 @@
                 if (e.keyCode == 27) {
                     fbCanvasInstance.isDrawingMode = false;
                 }
+            });
+            
+            fbEditorContainer.addEventListener('dblclick', function (e) {
+                var activeObject = fbCanvasInstance.getActiveObject(),
+                    textbox, style, bounds;
 
+                if (activeObject && activeObject instanceof fabric.Text) {
+                    bounds = activeObject.getBoundingRect();
+                    textbox = element('textarea');
+                    style = textbox.style;
+                    style.position = 'absolute';
+                    style.left = bounds.left + 'px';
+                    style.top = bounds.top + 'px';
+                    style.width = bounds.width + 'px';
+                    style.height = bounds.height + 'px';
+                    style.zIndex = 2001;
+                    textbox.value = activeObject.text;
+                    document.body.appendChild(textbox);
+                    textbox.focus();
+                    textbox.addEventListener('blur', function (e) {
+                        activeObject.setText(textbox.value);
+                        fbCanvasInstance.setActiveObject(activeObject);
+                        removeElements([textbox]);
+                    });
+                }
             });
 
             fbCanvasInstance.on('mouse:down', function (e) {
@@ -605,7 +629,7 @@
 
                 switch (activeTool) {
                     case textButton_id:
-                        objectToAdd = new fabric.IText(
+                        objectToAdd = new fabric.Text(
                            '修改文本, \r\n请双击文本框',
                             {
                                 top: startPoint.pageY,
