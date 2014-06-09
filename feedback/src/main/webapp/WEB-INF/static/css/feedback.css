@@ -140,6 +140,9 @@
     filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
     *margin-left: .3em;
 }
+.feedback-btn {
+    z-index: 10000;
+}
 .feedback-btn:hover,
 .feedback-btn:active,
 .feedback-btn.active,
